@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from celery_project.users import users_router                
-from celery_project.celery_utils import create_celery             
+from app.users import users_router                
+from app.celery_utils import create_celery             
 
 
 def create_app() -> FastAPI:

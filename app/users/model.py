@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 
-from celery_project.database import Base
+from app.database import Base
 
 
 class User(Base):

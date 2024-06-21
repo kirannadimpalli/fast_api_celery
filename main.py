@@ -1,5 +1,5 @@
 from celery import Celery
-from celery_project import create_app
+from app import create_app
 from dotenv import load_dotenv
 import os
 
