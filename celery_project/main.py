@@ -1,5 +1,5 @@
 from celery import Celery
-from fastapi import FastAPI
+from celery_project import create_app
 from dotenv import load_dotenv
 import os
 
@@ -8,7 +8,8 @@ load_dotenv()
 
 
 
-app = FastAPI()
+app = create_app()
+celery = app.celery_app
 
 celery = Celery(
     __name__,
