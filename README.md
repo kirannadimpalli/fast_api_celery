@@ -12,4 +12,7 @@ celery -A celery_project.main.celery worker -l info --pool=solo #NOTE windows po
 
 celery -A celery_project.main.celery flower --port=5555 #to check task status flower
 
+
+alembic revision --autogenerate
+
 ```
