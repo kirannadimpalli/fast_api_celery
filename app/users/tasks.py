@@ -43,3 +43,8 @@ def task_process_notification(self):
     except Exception as e:
         logger.error("exception raised, it would be retry after 5 seconds")
         raise self.retry(exc=e, countdown=5)
+    
+
+@shared_task(name="task_schedule_work")
+def task_schedule_work():
+    logger.info("task_schedule_work run")
