@@ -5,6 +5,7 @@ from asgiref.sync import async_to_sync
 from celery import shared_task
 from celery.signals import task_postrun
 from celery.utils.log import get_task_logger
+from app.database import db_context
 
 logger = get_task_logger(__name__)
 
@@ -48,3 +49,11 @@ def task_process_notification(self):
 @shared_task(name="task_schedule_work")
 def task_schedule_work():
     logger.info("task_schedule_work run")
+
+@shared_task()
+def task_send_welcome_email(user_pk):
+    from app.users.models import User
+
+    with db_context() as session:
+        user = session.get(User, user_pk)
+        logger.info(f'send email to {user.email} {user.id}')
