@@ -1,8 +1,9 @@
-from celery import shared_task
 import random
 
 import requests
+from asgiref.sync import async_to_sync
 from celery import shared_task
+from celery.signals import task_postrun
 from celery.utils.log import get_task_logger
 
 logger = get_task_logger(__name__)
@@ -21,7 +22,13 @@ def sample_task(email):
 
     api_call(email)
 
+@task_postrun.connect
+def task_postrun_handler(task_id, **kwargs):
+    from app.ws.views import update_celery_task_status
+    async_to_sync(update_celery_task_status)(task_id)
 
+    from app.ws.views import update_celery_task_status_socketio        # new
+    update_celery_task_status_socketio(task_id)                            
 
 
 @shared_task(bind=True)
