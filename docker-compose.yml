@@ -16,6 +16,9 @@ services:
       - 8010:8000
     env_file:
       - .env
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app
     depends_on:
       - redis
       - db

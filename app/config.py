@@ -22,6 +22,11 @@ class BaseConfig:
         # },
     }
 
+class TestingConfig(BaseConfig):
+    # https://fastapi.tiangolo.com/advanced/testing-database/
+    DATABASE_URL: str = "sqlite:///./test.db"
+    DATABASE_CONNECT_DICT: dict = {"check_same_thread": False}
+
 CELERY_TASK_DEFAULT_QUEUE: str = "default"
 
 # Force all queues to be explicitly listed in `CELERY_TASK_QUEUES` to help prevent typos
